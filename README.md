@@ -21,6 +21,11 @@ Funkin' Rewritten Github: https://github.com/HTV04/funkin-rewritten
 
 Love2D Game Engine: https://love2d.org
 
+# Progress
+Wish to view progress?
+
+A Google Spreadsheet for progress on the game can be found here: https://docs.google.com/spreadsheets/d/10settnGjbtIOice-QiVPH9wUw1H9zf1lzqYer16dNFw/edit?usp=sharing
+
 # Questions?
 If you have a possible question, feel free to contact me through one of the following.
 
