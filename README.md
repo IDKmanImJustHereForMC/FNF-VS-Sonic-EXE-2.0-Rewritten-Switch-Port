@@ -20,3 +20,10 @@ This port is built off Funkin' Rewritten, a fanmade version of FNF made with the
 Funkin' Rewritten Github: https://github.com/HTV04/funkin-rewritten
 
 Love2D Game Engine: https://love2d.org
+
+# Questions?
+If you have a possible question, feel free to contact me through one of the following.
+
+Discord: idk1033
+
+Email (barely active): 55attemps@gmail.com
