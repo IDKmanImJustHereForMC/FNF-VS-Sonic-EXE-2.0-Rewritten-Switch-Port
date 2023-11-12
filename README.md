@@ -1,4 +1,4 @@
-# FNF-VS-Sonic-EXE-2.0-Rewritten-Switch-Port
+# FNF VS Sonic EXE 2.0 Rewritten/Switch Port
 The source code for a small project with the simple goal of porting FNF Vs Sonic EXE (Specifically 2.0) to switch. This port is NOT 1:1, and may have some stuff missing or changed.
 
 To respect GameBanana's current Disapproval of most Sonic.EXE related content, this port, when finished, will NOT be uploaded there. It instead will be uploaded to alternative sites.
