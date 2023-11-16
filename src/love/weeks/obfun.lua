@@ -13,6 +13,8 @@ return {
 		--Game breaks if I don't do this
 		enemy = love.filesystem.load("sprites/boyfriend.lua")()
 
+		--The video is at an inconsistency with itself, it stutters and sets itself offbeat
+		--Would using the original version work?
 		video = love.graphics.newVideo("videos/Objection Funk Remastered.ogv")
 
 		enemyIcon:animate("unknown", false)
