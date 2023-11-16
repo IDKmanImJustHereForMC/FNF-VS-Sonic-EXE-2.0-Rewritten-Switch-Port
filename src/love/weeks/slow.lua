@@ -1,6 +1,7 @@
+--For whats supposed to be optimized, this is not well optimized
 local song, difficulty
 
-local wayBack, stageBack, stageMid, stageFront, curtains, egg, knuck, tail, jumpscaryalert, jumpy
+local wayBack, stageBack, stageMid, stageFront, curtains, egg, knuck, tail, jumpscaryalert, jumpy, IntroCircle, IntroText
 
 return {
 	enter = function(self, from, songNum, songAppend)
@@ -19,6 +20,8 @@ return {
 		knuck = graphics.newImage(love.graphics.newImage(graphics.imagePath("slow/KNUCKLE")))
 		tail = graphics.newImage(love.graphics.newImage(graphics.imagePath("slow/TAIL")))
 		jumpscaryalert = graphics.newImage(love.graphics.newImage(graphics.imagePath("slow/OOGABOOGA")))
+		IntroCircle = graphics.newImage(love.graphics.newImage(graphics.imagePath("slow/CircleTooSlow")))
+		IntroText = graphics.newImage(love.graphics.newImage(graphics.imagePath("slow/TextTooSlow")))
 		
 
 		wayBack.y = 20
@@ -29,6 +32,10 @@ return {
 		egg.x, egg.y = -30, 50
 		knuck.x, knuck.y = 400, 50
 		tail.y = 50
+		--Why is it like this
+		IntroCircle.y, IntroCircle.x = cam.y + 300,  cam.x - 400
+		IntroText.y, IntroText.x = cam.y + 300, cam.x + 1700
+		
 
 		--Off to the void with ye!!!!
 		offx = 999999
@@ -77,8 +84,25 @@ return {
 		weeks:update(dt)
 		tails:update(dt)
 
-		--JUMPSCARES!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
-		--There has to be a cleaner way to do it, but better dusty than completely covered in mud
+	--Intro stuff????
+	--No don't run every frame
+	if musicTime <= 8000 then
+		if musicTime >= 0 then
+			if musicTime <= 4000 then
+				IntroCircle.x = IntroCircle.x + 15
+				IntroText.x = IntroText.x - 15
+			end
+			if musicTime >= 4500 then
+				if musicTime <= 8000 then
+					IntroCircle.x = IntroCircle.x + 15
+					IntroText.x = IntroText.x - 15
+				end
+			end
+		end
+	end
+
+	--JUMPSCARES!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+	--There has to be a cleaner way to do it, but better dusty than completely covered in mud
 	if musicTime >= (97700) then
 			if musicTime <= (97700 + 300) then
 
@@ -191,11 +215,13 @@ return {
 				
 			love.graphics.pop()
 			weeks:drawRating(0.9)
-			jumpy:draw()
 		love.graphics.pop()
 
 		weeks:drawUI()
 		jumpscaryalert:draw()
+		jumpy:draw()
+		IntroCircle:draw()
+		IntroText:draw()
 	end,
 
 	leave = function(self)
@@ -208,6 +234,8 @@ return {
 		knuck = nil
 		tail = nil
 		jumpy = nil
+		IntroCircle = nil
+		IntroText = nil
 
 		weeks:leave()
 	end

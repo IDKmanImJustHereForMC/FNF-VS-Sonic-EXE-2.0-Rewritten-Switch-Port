@@ -72,7 +72,6 @@ return {
 		--Apparently only works one at a time, welp, time to copy paste
 		--I only partially stole it this time
 		--YanDev ass code
-		--I was going to add screen shake but it turned into a cam follow, he is now the only person who does this
 		if musicTime <= (95000) then
 			if enemy:getAnimName() == "down" and health >= 20 then
 				health = health - 0.15
@@ -101,18 +100,22 @@ return {
 			end
 		end
 
-		if enemy:getAnimName() == "down" then
-				cam.y = cam.y - 1
-		end
-		if enemy:getAnimName() == "up" then
-				cam.y = cam.y + 1
-		end
-		if enemy:getAnimName() == "left" then
-				cam.x = cam.x + 1
-		end
-		if enemy:getAnimName() == "right" then
-				cam.x = cam.x - 1
-		end
+		
+		--I was going to add screen shake but it turned into this shitty cam follow thing, uncomment if you for some reason want it
+		--idk how to "batch comment" things
+
+	                --if enemy:getAnimName() == "down" then
+		--		cam.y = cam.y - 1
+		--end
+		--if enemy:getAnimName() == "up" then
+		--		cam.y = cam.y + 1
+		--end
+		--if enemy:getAnimName() == "left" then
+		--		cam.x = cam.x + 1
+		--end
+		--if enemy:getAnimName() == "right" then
+		--		cam.x = cam.x - 1
+		--end
 
 		if not (countingDown or graphics.isFading()) and not (inst:isPlaying() and voices:isPlaying()) then
 			status.setLoading(true)
