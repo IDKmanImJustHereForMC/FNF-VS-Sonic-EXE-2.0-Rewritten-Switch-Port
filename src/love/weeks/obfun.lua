@@ -37,6 +37,7 @@ return {
 	initUI = function(self)
 		weeks:initUI()
 
+  --Why yes I did make this chart (and accidentally delete the original json) thanks for asking!!!!
 		weeks:generateNotes(love.filesystem.load("charts/obfun/obfun.lua")())
 	end,
 
@@ -105,3 +106,5 @@ return {
 }
 
 --omg Objection Funk hii!!!!!!!!
+--This has nothing to do with the original m9d, I just thought it would be a fun add.
+--This was originally going to be a Payday song but I regarded it as too long to chart
