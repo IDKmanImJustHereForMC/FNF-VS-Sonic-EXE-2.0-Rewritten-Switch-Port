@@ -85,6 +85,7 @@ return {
 		tails:update(dt)
 
 	--Intro stuff????
+ --The effectiveness of this depends on your framerate, luckily, the framerate will be stable... right?
 	--No don't run every frame
 	if musicTime <= 8000 then
 		if musicTime >= 0 then
@@ -103,6 +104,8 @@ return {
 
 	--JUMPSCARES!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
 	--There has to be a cleaner way to do it, but better dusty than completely covered in mud
+ --The effectiveness changes based on window size/aspect ratio, this WILL bite me back in the ass later, but I don't know how to fix it
+ --We'll cross that road when we get there
 	if musicTime >= (97700) then
 			if musicTime <= (97700 + 300) then
 
