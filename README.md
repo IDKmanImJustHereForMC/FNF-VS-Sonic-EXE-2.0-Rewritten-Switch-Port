@@ -26,12 +26,16 @@ Wish to view progress?
 
 A Google Spreadsheet for progress on the game can be found [here](https://docs.google.com/spreadsheets/d/10settnGjbtIOice-QiVPH9wUw1H9zf1lzqYer16dNFw/edit?usp=sharing).
 
+Update: As of now I have completely forgotten how to build, fuck me.
+
 # Q&A
 Q: Isn't there already a Vs. Sonic.EXE Switch Port/FNFR Port in development?
+
 A: Yes. This is not meant to be better than the one already in development nor replace it, it is simply just something I decided to concot because I thought it would be fun. In fact, [go check out their current build](https://drive.google.com/file/d/1csLTQOutnyLr7hUYstSu9Dyy3Rm4pjbt/view?usp=sharing).
 
 Q: Why the base engine? Why not Vanilla Engine?
-A: At the time of starting the project I was unaware of Vanilla Engine's existence. Now that I am, however, I simply think it too much a hassle to move over. If I do though, it will be AFTER the proper release.
+
+A: At the time of starting the project I was unaware of Vanilla Engine's existence. Now that I am, however, I simply think it too much a hassle to move over. If I do though, it will be AFTER the proper release..
 
 # Other Questions?
 If you have another possible question, feel free to contact me through one of the following.
