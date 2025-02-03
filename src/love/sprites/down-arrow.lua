@@ -31,7 +31,8 @@ return graphics.newSprite(
 		{x = 149, y = 392, width = 142, height = 140, offsetX = -4, offsetY = -2, offsetWidth = 149, offsetHeight = 146}, -- 9: down press0000
 		{x = 149, y = 392, width = 142, height = 140, offsetX = -4, offsetY = -2, offsetWidth = 149, offsetHeight = 146}, -- 10: down press0001
 		{x = 0, y = 388, width = 149, height = 146, offsetX = 0, offsetY = 0, offsetWidth = 0, offsetHeight = 0}, -- 11: down press0002
-		{x = 0, y = 388, width = 149, height = 146, offsetX = 0, offsetY = 0, offsetWidth = 0, offsetHeight = 0} -- 12: down press0003
+		{x = 0, y = 388, width = 149, height = 146, offsetX = 0, offsetY = 0, offsetWidth = 0, offsetHeight = 0}, -- 12: down press0003
+		{x = 1850, y = 462, width = 157, height = 154, offsetX = 0, offsetY = 0, offsetWidth = 0, offsetHeight = 0} -- 13: Stat Down
 	},
 	{
 		["off"] = {start = 1, stop = 1, speed = 0, offsetX = 0, offsetY = 0},
@@ -39,7 +40,8 @@ return graphics.newSprite(
 		["end"] = {start = 3, stop = 3, speed = 0, offsetX = 0, offsetY = 0},
 		["hold"] = {start = 4, stop = 4, speed = 0, offsetX = 0, offsetY = 0},
 		["confirm"] = {start = 5, stop = 8, speed = 24, offsetX = 0, offsetY = 0},
-		["press"] = {start = 9, stop = 12, speed = 24, offsetX = 0, offsetY = 0}
+		["press"] = {start = 9, stop = 12, speed = 24, offsetX = 0, offsetY = 0},
+		["stat"] = {start = 13, stop = 13, speed = 0, offsetX = 0, offsetY = 0}
 	},
 	"off",
 	false

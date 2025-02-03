@@ -1,5 +1,7 @@
+--By Default
 local song, difficulty
 
+--Static Stage Assets
 local stageBack, stageFront, curtains, FishOnDaFlo, TheOtherFlo, TALISDED
 
 return {
@@ -39,7 +41,6 @@ return {
 	load = function(self)
 		weeks:load()
 
-
 		inst = love.audio.newSource("music/sun/Inst.ogg", "stream")
 		voices = love.audio.newSource("music/sun/Voices.ogg", "stream")
 
@@ -68,54 +69,51 @@ return {
 			end
 		end
 
-		--Oh hey! Code that makes it so health drain exsts, but is ugly! Sorry console people!
-		--Apparently only works one at a time, welp, time to copy paste
-		--I only partially stole it this time
-		--YanDev ass code
+		--Health drain code. (Sorry Controller ppl!)
+		--Did normal opponent health drain cus I can't figure out Black Sun's ACTUAL hp mechanic.
+
+		--Setting the amount of health drain this way simply so it's easier to mess with.
 		if musicTime <= (95000) then
-			if enemy:getAnimName() == "down" and health >= 20 then
-				health = health - 0.15
-			end
-			if enemy:getAnimName() == "up" and health >= 20 then
-				health = health - 0.15
-			end
-			if enemy:getAnimName() == "left" and health >= 20 then
-				health = health - 0.15
-			end
-			if enemy:getAnimName() == "right" and health >= 20 then
-				health = health - 0.15
-			end
+			drainAmount = 0.2
 		else
-			if enemy:getAnimName() == "down" and health >= 20 then
-				health = health - 0.3
+			drainAmount = 0.4
+		end
+
+		--Checks if the enemy's ARROWS are pressed instead of if they play an animation like last time.
+		--Done this way so the amount of health that drains is shorter than if it were like how it were before.
+		--These are made seperate so multiple arrows in quick succession works how it should.
+		if health >= 20 then
+			if enemyArrows[1]:getAnimName() == "confirm" then
+				health = health - drainAmount
 			end
-			if enemy:getAnimName() == "up" and health >= 20 then
-				health = health - 0.3
+			if enemyArrows[2]:getAnimName() == "confirm" then
+				health = health - drainAmount
 			end
-			if enemy:getAnimName() == "left" and health >= 20 then
-				health = health - 0.3
+			if enemyArrows[3]:getAnimName() == "confirm" then
+				health = health - drainAmount
 			end
-			if enemy:getAnimName() == "right" and health >= 20 then
-				health = health - 0.3
+			if enemyArrows[4]:getAnimName() == "confirm" then
+				health = health - drainAmount
 			end
 		end
 
-		
-		--I was going to add screen shake but it turned into this shitty cam follow thing, uncomment if you for some reason want it
-		--idk how to "batch comment" things
+		--I was trying to add a cam follw thingy, but it turned into a hilarious mess and i cant stop laughing at it
+		--For best experience, crank up to 1.25
 
-	                --if enemy:getAnimName() == "down" then
-		--		cam.y = cam.y - 1
-		--end
-		--if enemy:getAnimName() == "up" then
-		--		cam.y = cam.y + 1
-		--end
-		--if enemy:getAnimName() == "left" then
-		--		cam.x = cam.x + 1
-		--end
-		--if enemy:getAnimName() == "right" then
-		--		cam.x = cam.x - 1
-		--end
+		--[[ if not mustHitSection then
+			if enemy:getAnimName() == "down" then
+				camTimer = Timer.tween(0.75, cam, {x = -enemy.x - 100, y = -enemy.y + 50}, "out-quad")
+			end
+			if enemy:getAnimName() == "up" then
+				camTimer = Timer.tween(0.75, cam, {x = -enemy.x - 100, y = -enemy.y + 100}, "out-quad")
+			end
+			if enemy:getAnimName() == "left" then
+				camTimer = Timer.tween(0.75, cam, {x = -enemy.x - 75, y = -enemy.y + 75}, "out-quad")
+			end
+			if enemy:getAnimName() == "right" then
+				camTimer = Timer.tween(0.75, cam, {x = -enemy.x - 125, y = -enemy.y + 75}, "out-quad")
+			end
+		end ]]--
 
 		if not (countingDown or graphics.isFading()) and not (inst:isPlaying() and voices:isPlaying()) then
 			status.setLoading(true)

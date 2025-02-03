@@ -1,5 +1,5 @@
 return graphics.newSprite(
-	love.graphics.newImage(graphics.imagePath("fun/Majin Boppers Back")),
+	love.graphics.newImage(graphics.imagePath("fun/MajinBoppersBack")),
 	-- Automatically generated from Majin Boppers Back.xml
 	{
 		{x = 0, y = 0, width = 1197, height = 874, offsetX = 0, offsetY = 0, offsetWidth = 1200, offsetHeight = 874}, -- 1: MajinBop2 instance 10000

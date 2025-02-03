@@ -19,34 +19,69 @@ along with this program.  If not, see <https://www.gnu.org/licenses/>.
 
 local fromState
 
+local goFunVal = love.math.random(1, 5)
+
 return {
 	enter = function(self, from)
 		local boyfriend = fakeBoyfriend or boyfriend
+
+		if closeOnDeath then
+			if goFunVal == 1 then
+				love.window.showMessageBox("HAHAHA", "COME BACK SOON")
+			elseif goFunVal == 2 then
+				love.window.showMessageBox("YOU WANNA LEARN HOW TO DO A F INFINITE?", "LIGHT PUNCH, HEAVY PUNCH. MEDIUM KICK, HEAVY KICK.")
+			elseif goFunVal == 3 then
+				love.window.showMessageBox("REMEMBER", "BLUE DOWN ARROWS")
+			elseif goFunVal == 4 then
+				love.window.showMessageBox("HAHAHA", "COME BACK SOON")
+			elseif goFunVal == 5 then
+				love.window.showMessageBox("HAHAHA", "COME BACK SOON")
+			end
+			love.event.quit()
+		end
+
+		if tooFestDeath then
+			tooFestDeathVid = love.graphics.newVideo("videos/BfFuckingDies.ogv") --i cant fucking figure it out
+		end
 
 		fromState = from
 
 		if inst then inst:stop() end
 		voices:stop()
+		
+		if tooFestDeath then
+			boyfriend.sizeX = 0.00000001
+			tooFestDeathVid:play()
+			boyfriend:animate("dies", false) --Just in-case
+		else
+			audio.playSound(sounds["death"])
 
-		audio.playSound(sounds["death"])
-
-		boyfriend:animate("dies", false)
-
-		Timer.clear()
-
-		Timer.tween(
-			2,
-			cam,
-			{x = -boyfriend.x, y = -boyfriend.y, sizeX = camScale.x, sizeY = camScale.y},
-			"out-quad",
-			function()
-				inst = love.audio.newSource("music/game-over.ogg", "stream")
-				inst:setLooping(true)
-				inst:play()
-
-				boyfriend:animate("dead", true)
+			if BFcanDie then
+				boyfriend:animate("dies", false)
+			else
+				boyfriend:animate("miss left", false)
 			end
-		)
+
+			Timer.clear()
+
+			Timer.tween(
+				2,
+				cam,
+				{x = -boyfriend.x, y = -boyfriend.y, sizeX = camScale.x, sizeY = camScale.y},
+				"out-quad",
+				function()
+					inst = love.audio.newSource("music/game-over.ogg", "stream")
+					inst:setLooping(true)
+					inst:play()
+
+					if BFcanDie then
+						boyfriend:animate("dead", true)
+					else
+						boyfriend:animate("miss up", false)
+					end
+				end
+			)
+		end
 	end,
 
 	update = function(self, dt)
@@ -63,7 +98,11 @@ return {
 
 				cam.x, cam.y = -boyfriend.x, -boyfriend.y
 
-				boyfriend:animate("dead confirm", false)
+				if BFcanDie then
+					boyfriend:animate("dead confirm", false)
+				else
+					boyfriend:animate("idle", false)
+				end
 
 				graphics.fadeOut(
 					3,
@@ -75,6 +114,10 @@ return {
 				)
 			elseif input:pressed("gameBack") then
 				status.setLoading(true)
+
+				if tooFestDeath then
+					tooFestDeath = false
+				end
 
 				graphics.fadeOut(
 					0.5,

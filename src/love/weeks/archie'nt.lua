@@ -14,7 +14,7 @@ return {
 		stageBack:animate("broken", false)
 		floor = love.filesystem.load("sprites/archie'nt/floor.lua")()
 		floor:animate("yellow", false)
-		--I'm not doing the pre-song animation fuck you
+		--I'm not doing the pre-song animation fuck you and fuck that
 		chamber = love.filesystem.load("sprites/archie'nt/chamber.lua")()
 		chamber:animate("hedied", false)
 		beam = love.filesystem.load("sprites/archie'nt/emerald beam.lua")()
@@ -137,4 +137,4 @@ return {
 	end
 }
 
---Codename is a joke, Fleetway Super Sonic is from the Fleetway comics, which isn't the more popular Archie comics, so it's not Archie, thus Archie'nt.
+--Codename is a joke, Fleetway Super Sonic is from the Fleetway comics, which isn't the Archie comics, thus Archie'nt.

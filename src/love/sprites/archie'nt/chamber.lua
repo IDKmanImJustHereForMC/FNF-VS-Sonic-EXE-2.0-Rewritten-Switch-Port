@@ -1,5 +1,5 @@
 return graphics.newSprite(
-	love.graphics.newImage(graphics.imagePath("archie'nt/The Chamber")),
+	love.graphics.newImage(graphics.imagePath("archie'nt/The_Chamber")),
 
 	-- Automatically generated from The Chamber.xml
 	{

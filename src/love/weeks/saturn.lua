@@ -18,8 +18,8 @@ return {
 		enemy.x, enemy.y = -380, -50
 		boyfriend.x, boyfriend.y = 360, 100
 
-		--I don't know how to change BF's icon
 		enemyIcon:animate("doll", false)
+		boyfriendIcon:animate("saturnfriend", false)
 
 		self:load()
 	end,
@@ -46,6 +46,13 @@ return {
 
 		--Borrowed code that makes Tails Doll float, I stole it from GuglioIsStupid#8008 on the FNFR Discord (his name is actually just a demon emoji)
 		enemy.y = enemy.y + math.sin(love.timer.getTime())
+
+		--hopefully prevents the pre established icon code from getting in the way
+		if health <= 20 then
+			boyfriendIcon:animate("saturnfriend", false)
+		else
+			boyfriendIcon:animate("saturnfriend", false)
+		end
 
 		if not (countingDown or graphics.isFading()) and not (inst:isPlaying() and voices:isPlaying()) then
 			status.setLoading(true)

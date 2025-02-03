@@ -22,6 +22,7 @@ along with this program.  If not, see <https://www.gnu.org/licenses/>.
 local menuID, selection
 local curDir, dirTable
 local sprite, spriteAnims, overlaySprite
+local moveMod = 1
 
 return {
 	spriteViewerSearch = function(self, dir)
@@ -64,13 +65,13 @@ return {
 		if menus[menuID][1] == 2 then -- Sprite viewer
 			if svMode == 2 then
 				if key == "w" then
-					overlaySprite.y = overlaySprite.y - 1
+					overlaySprite.y = overlaySprite.y - moveMod
 				elseif key == "a" then
-					overlaySprite.x = overlaySprite.x - 1
+					overlaySprite.x = overlaySprite.x - moveMod
 				elseif key == "s" then
-					overlaySprite.y = overlaySprite.y + 1
+					overlaySprite.y = overlaySprite.y + moveMod
 				elseif key == "d" then
-					overlaySprite.x = overlaySprite.x + 1
+					overlaySprite.x = overlaySprite.x + moveMod
 				end
 			end
 		end
@@ -172,6 +173,14 @@ return {
 		end
 		if input:pressed("debugZoomIn") then
 			cam.sizeX, cam.sizeY = cam.sizeX + 0.05, cam.sizeY + 0.05
+		end
+		--Custom debug move modifier cus im TIRED OF ONE PIXEL AT A TIME
+		if input:pressed("debugMoveMod") then --Z by default, i dont fw shift
+			if moveMod == 1 then --yeah its a toggle
+				moveMod = 10
+			elseif moveMod == 10 then
+				moveMod = 1
+			end
 		end
 	end,
 

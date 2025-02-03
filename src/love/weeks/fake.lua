@@ -77,6 +77,24 @@ return {
 			end
 		end
 
+		--Take em away
+		--i learned how to use i
+		if musicTime >= 111111 then
+			if settings.downscroll then
+				for i = 1, 4 do
+					enemyArrows[i].y = enemyArrows[i].y + 3
+					boyfriendArrows[i].y = boyfriendArrows[i].y + 3
+					enemyIcon.y, boyfriendIcon.y = enemyIcon.y - 3, boyfriendIcon.y - 3
+				end
+			else
+				for i = 1, 4 do
+					enemyArrows[i].y = enemyArrows[i].y - 3
+					boyfriendArrows[i].y = boyfriendArrows[i].y - 3
+					enemyIcon.y, boyfriendIcon.y = enemyIcon.y + 3, boyfriendIcon.y + 3
+				end
+			end
+		end
+
 		if not (countingDown or graphics.isFading()) and not (inst:isPlaying() and voices:isPlaying()) then
 
 			status.setLoading(true)

@@ -1,5 +1,5 @@
 return graphics.newSprite(
-	love.graphics.newImage(graphics.imagePath("fun/majin FG2")),
+	love.graphics.newImage(graphics.imagePath("fun/majinFG2")),
 	-- Automatically generated from majin FG2.xml
 	{
 		{x = 0, y = 0, width = 424, height = 492, offsetX = -9, offsetY = 0, offsetWidth = 443, offsetHeight = 492}, -- 1: majin front bopper20000

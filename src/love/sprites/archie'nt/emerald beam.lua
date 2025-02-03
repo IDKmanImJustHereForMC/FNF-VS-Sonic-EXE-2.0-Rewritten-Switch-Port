@@ -1,5 +1,5 @@
 return graphics.newSprite(
-	love.graphics.newImage(graphics.imagePath("archie'nt/Emerald Beam Charged")),
+	love.graphics.newImage(graphics.imagePath("archie'nt/Emerald_Beam_Charged")),
 
 	-- Automatically generated from Emerald Beam Charged.xml
 	{

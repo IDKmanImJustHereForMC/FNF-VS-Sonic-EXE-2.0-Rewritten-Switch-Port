@@ -3,28 +3,28 @@ return graphics.newSprite(
 	{
 		{x = 0, y = 0, width = 150, height = 150, offsetX = 0, offsetY = 0, offsetWidth = 0, offsetHeight = 0}, -- 1: Boyfriend
 		{x = 150, y = 0, width = 150, height = 150, offsetX = 0, offsetY = 0, offsetWidth = 0, offsetHeight = 0}, -- 2: Boyfriend Losing
-		{x = 300, y = 0, width = 150, height = 150, offsetX = 0, offsetY = 0, offsetWidth = 0, offsetHeight = 0}, -- 3: Skip and Pump
-		{x = 450, y = 0, width = 150, height = 150, offsetX = 0, offsetY = 0, offsetWidth = 0, offsetHeight = 0}, -- 4: Skid and Pump Losing
-		{x = 600, y = 0, width = 150, height = 150, offsetX = 0, offsetY = 0, offsetWidth = 0, offsetHeight = 0}, -- 5: Pico
-		{x = 750, y = 0, width = 150, height = 150, offsetX = 0, offsetY = 0, offsetWidth = 0, offsetHeight = 0}, -- 6: Pico Losing
-		{x = 900, y = 0, width = 150, height = 150, offsetX = 0, offsetY = 0, offsetWidth = 0, offsetHeight = 0}, -- 7: Mommy Mearest
-		{x = 1050, y = 0, width = 150, height = 150, offsetX = 0, offsetY = 0, offsetWidth = 0, offsetHeight = 0}, -- 8: Mommy Mearest Losing
-		{x = 1200, y = 0, width = 150, height = 150, offsetX = 0, offsetY = 0, offsetWidth = 0, offsetHeight = 0}, -- 9: Tankman
-		{x = 1350, y = 0, width = 150, height = 150, offsetX = 0, offsetY = 0, offsetWidth = 0, offsetHeight = 0}, -- 10: Tankman Losing
+		{x = 300, y = 0, width = 150, height = 150, offsetX = 0, offsetY = 0, offsetWidth = 0, offsetHeight = 0}, -- 3: Skip and Pump (I lied its high faker)
+		{x = 450, y = 0, width = 150, height = 150, offsetX = 0, offsetY = 0, offsetWidth = 0, offsetHeight = 0}, -- 4: Skid and Pump Losing (I lied its high faker)
+		{x = 600, y = 0, width = 150, height = 150, offsetX = 0, offsetY = 0, offsetWidth = 0, offsetHeight = 0}, -- 5: Pico (I lied its high faker)
+		{x = 750, y = 0, width = 150, height = 150, offsetX = 0, offsetY = 0, offsetWidth = 0, offsetHeight = 0}, -- 6: Pico Losing (I lied its high faker)
+		{x = 900, y = 0, width = 150, height = 150, offsetX = 0, offsetY = 0, offsetWidth = 0, offsetHeight = 0}, -- 7: Mommy Mearest (I lied its high faker)
+		{x = 1050, y = 0, width = 150, height = 150, offsetX = 0, offsetY = 0, offsetWidth = 0, offsetHeight = 0}, -- 8: Mommy Mearest Losing (I lied its high faker)
+		{x = 1200, y = 0, width = 150, height = 150, offsetX = 0, offsetY = 0, offsetWidth = 0, offsetHeight = 0}, -- 9: Tankman (I lied its high faker)
+		{x = 1350, y = 0, width = 150, height = 150, offsetX = 0, offsetY = 0, offsetWidth = 0, offsetHeight = 0}, -- 10: Tankman Losing (I lied its high faker)
 		{x = 0, y = 150, width = 150, height = 150, offsetX = 0, offsetY = 0, offsetWidth = 0, offsetHeight = 0}, -- 11: Unknown
 		{x = 150, y = 150, width = 150, height = 150, offsetX = 0, offsetY = 0, offsetWidth = 0, offsetHeight = 0}, -- 12: Unknown Losing
-		{x = 300, y = 150, width = 150, height = 150, offsetX = 0, offsetY = 0, offsetWidth = 0, offsetHeight = 0}, -- 13: Daddy Dearest
-		{x = 450, y = 150, width = 150, height = 150, offsetX = 0, offsetY = 0, offsetWidth = 0, offsetHeight = 0}, -- 14: Daddy Dearest Losing
-		{x = 600, y = 150, width = 150, height = 150, offsetX = 0, offsetY = 0, offsetWidth = 0, offsetHeight = 0}, -- 15: Boyfriend (Old)
-		{x = 750, y = 150, width = 150, height = 150, offsetX = 0, offsetY = 0, offsetWidth = 0, offsetHeight = 0}, -- 16: Boyfriend Losing (Old)
-		{x = 900, y = 150, width = 150, height = 150, offsetX = 0, offsetY = 0, offsetWidth = 0, offsetHeight = 0}, -- 17: Girlfriend
-		{x = 1050, y = 150, width = 150, height = 150, offsetX = 0, offsetY = 0, offsetWidth = 0, offsetHeight = 0}, -- 18: Daddy Dearest and Mommy Mearest
-		{x = 1200, y = 150, width = 150, height = 150, offsetX = 0, offsetY = 0, offsetWidth = 0, offsetHeight = 0}, -- 19: Daddy Dearest and Mommy Mearest Losing
-		{x = 1350, y = 150, width = 150, height = 150, offsetX = 0, offsetY = 0, offsetWidth = 0, offsetHeight = 0}, -- 20: Monster
-		{x = 0, y = 300, width = 150, height = 150, offsetX = 0, offsetY = 0, offsetWidth = 0, offsetHeight = 0}, -- 21: Monster Losing
-		{x = 150, y = 300, width = 150, height = 150, offsetX = 0, offsetY = 0, offsetWidth = 0, offsetHeight = 0}, -- 22: Boyfriend (Pixel)
-		{x = 300, y = 300, width = 150, height = 150, offsetX = 0, offsetY = 0, offsetWidth = 0, offsetHeight = 0}, -- 23: Senpai
-		{x = 450, y = 300, width = 150, height = 150, offsetX = 0, offsetY = 0, offsetWidth = 0, offsetHeight = 0}, -- 24: Spirit
+		{x = 300, y = 150, width = 150, height = 150, offsetX = 0, offsetY = 0, offsetWidth = 0, offsetHeight = 0}, -- 13: Daddy Dearest (I lied its high faker)
+		{x = 450, y = 150, width = 150, height = 150, offsetX = 0, offsetY = 0, offsetWidth = 0, offsetHeight = 0}, -- 14: Daddy Dearest Losing (I lied its high faker)
+		{x = 600, y = 150, width = 150, height = 150, offsetX = 0, offsetY = 0, offsetWidth = 0, offsetHeight = 0}, -- 15: Boyfriend (Old) (I lied its high faker)
+		{x = 750, y = 150, width = 150, height = 150, offsetX = 0, offsetY = 0, offsetWidth = 0, offsetHeight = 0}, -- 16: Boyfriend Losing (Old) (I lied its high faker)
+		{x = 900, y = 150, width = 150, height = 150, offsetX = 0, offsetY = 0, offsetWidth = 0, offsetHeight = 0}, -- 17: Girlfriend (I lied its high faker)
+		{x = 1050, y = 150, width = 150, height = 150, offsetX = 0, offsetY = 0, offsetWidth = 0, offsetHeight = 0}, -- 18: Daddy Dearest and Mommy Mearest (I lied its high faker)
+		{x = 1200, y = 150, width = 150, height = 150, offsetX = 0, offsetY = 0, offsetWidth = 0, offsetHeight = 0}, -- 19: Daddy Dearest and Mommy Mearest Losing (I lied its high faker)
+		{x = 1350, y = 150, width = 150, height = 150, offsetX = 0, offsetY = 0, offsetWidth = 0, offsetHeight = 0}, -- 20: Monster (I lied its high faker)
+		{x = 0, y = 300, width = 150, height = 150, offsetX = 0, offsetY = 0, offsetWidth = 0, offsetHeight = 0}, -- 21: Monster Losing (ERM NO WAY ACTUALLY)
+		{x = 150, y = 300, width = 150, height = 150, offsetX = 0, offsetY = 0, offsetWidth = 0, offsetHeight = 0}, -- 22: Boyfriend (Pixel) (ERM NO WAY ACTUALLY)
+		{x = 300, y = 300, width = 150, height = 150, offsetX = 0, offsetY = 0, offsetWidth = 0, offsetHeight = 0}, -- 23: Senpai (I lied its high faker)
+		{x = 450, y = 300, width = 150, height = 150, offsetX = 0, offsetY = 0, offsetWidth = 0, offsetHeight = 0}, -- 24: Spirit (I lied its high faker)
 		{x = 600, y = 300, width = 150, height = 150, offsetX = 0, offsetY = 0, offsetWidth = 0, offsetHeight = 0}, -- 25: Sonic
 		{x = 750, y = 300, width = 150, height = 150, offsetX = 0, offsetY = 0, offsetWidth = 0, offsetHeight = 0}, -- 26: Sonic Losing
 		{x = 900, y = 600, width = 150, height = 150, offsetX = 0, offsetY = 0, offsetWidth = 0, offsetHeight = 0}, -- 27: Sonic Angry
@@ -50,7 +50,28 @@ return graphics.newSprite(
 		{x = 0, y = 600, width = 150, height = 150, offsetX = 0, offsetY = 0, offsetWidth = 0, offsetHeight = 0}, -- 47: Fleetway
 		{x = 150, y = 600, width = 150, height = 150, offsetX = 0, offsetY = 0, offsetWidth = 0, offsetHeight = 0}, -- 48: Fleetway Losing
 		{x = 900, y = 750, width = 150, height = 150, offsetX = 0, offsetY = 0, offsetWidth = 0, offsetHeight = 0}, -- 49: Coldsteel
-		{x = 1050, y = 750, width = 150, height = 150, offsetX = 0, offsetY = 0, offsetWidth = 0, offsetHeight = 0} -- 50: Coldsteel Losing
+		{x = 1050, y = 750, width = 150, height = 150, offsetX = 0, offsetY = 0, offsetWidth = 0, offsetHeight = 0}, -- 50: Coldsteel Losing
+		{x = 1200, y = 750, width = 150, height = 150, offsetX = 0, offsetY = 0, offsetWidth = 0, offsetHeight = 0}, -- 51: EXEmerge Idle Normal
+		{x = 1350, y = 750, width = 150, height = 150, offsetX = 0, offsetY = 0, offsetWidth = 0, offsetHeight = 0}, -- 52: EXEmerge Idle Winning
+		{x = 0, y = 900, width = 150, height = 150, offsetX = 0, offsetY = 0, offsetWidth = 0, offsetHeight = 0}, -- 53: EXEmerge Right Winning 
+		{x = 150, y = 900, width = 150, height = 150, offsetX = 0, offsetY = 0, offsetWidth = 0, offsetHeight = 0}, -- 54: EXEmerge Right Normal
+		{x = 300, y = 900, width = 150, height = 150, offsetX = 0, offsetY = 0, offsetWidth = 0, offsetHeight = 0}, -- 55: EXEmerge Up Winning
+		{x = 450, y = 900, width = 150, height = 150, offsetX = 0, offsetY = 0, offsetWidth = 0, offsetHeight = 0}, -- 56: EXEmerge Up Normal
+		{x = 600, y = 900, width = 150, height = 150, offsetX = 0, offsetY = 0, offsetWidth = 0, offsetHeight = 0}, -- 57: EXEmerge Down Winning
+		{x = 750, y = 900, width = 150, height = 150, offsetX = 0, offsetY = 0, offsetWidth = 0, offsetHeight = 0}, -- 58: EXEmerge Down Normal
+		{x = 900, y = 900, width = 150, height = 150, offsetX = 0, offsetY = 0, offsetWidth = 0, offsetHeight = 0}, -- 59: EXEmerge Left Winning
+		{x = 1050, y = 900, width = 150, height = 150, offsetX = 0, offsetY = 0, offsetWidth = 0, offsetHeight = 0}, -- 60: EXEmerge Left Normal
+		{x = 1200, y = 900, width = 150, height = 150, offsetX = 0, offsetY = 0, offsetWidth = 0, offsetHeight = 0}, -- 61: EXEmerge Phase 2
+		{x = 1350, y = 900, width = 150, height = 150, offsetX = 0, offsetY = 0, offsetWidth = 0, offsetHeight = 0}, -- 62: EXEmerge Phase 2 but like that one really cool part i like
+		{x = 0, y = 1050, width = 150, height = 150, offsetX = 0, offsetY = 0, offsetWidth = 0, offsetHeight = 0}, -- 63: BF EXEmerge that one really awesome part
+		{x = 150, y = 1050, width = 150, height = 150, offsetX = 0, offsetY = 0, offsetWidth = 0, offsetHeight = 0}, -- 64: BF EXEmerge that one really awesome part but hes losing
+		{x = 300, y = 1050, width = 150, height = 150, offsetX = 0, offsetY = 0, offsetWidth = 0, offsetHeight = 0}, -- 65: BF EXEmerge
+		{x = 450, y = 1050, width = 150, height = 150, offsetX = 0, offsetY = 0, offsetWidth = 0, offsetHeight = 0}, --66: BF EXEmerge Losing
+		{x = 600, y = 1050, width = 150, height = 150, offsetX = 0, offsetY = 0, offsetWidth = 0, offsetHeight = 0}, --67: X
+		{x = 750, y = 1050, width = 150, height = 150, offsetX = 0, offsetY = 0, offsetWidth = 0, offsetHeight = 0}, --68: X Losing
+		{x = 900, y = 1050, width = 150, height = 150, offsetX = 0, offsetY = 0, offsetWidth = 0, offsetHeight = 0}, --69: X (Spooky)
+		{x = 1050, y = 1050, width = 150, height = 150, offsetX = 0, offsetY = 0, offsetWidth = 0, offsetHeight = 0}, --70: REAL Sonic
+		{x = 1200, y = 1050, width = 150, height = 150, offsetX = 0, offsetY = 0, offsetWidth = 0, offsetHeight = 0} --71: REAL Sonic Losing
 	},
 	{
 		["boyfriend"] = {start = 1, stop = 1, speed = 0, offsetX = 0, offsetY = 0},
@@ -102,7 +123,29 @@ return graphics.newSprite(
 		["fleetway"] = {start = 47, stop = 47, speed = 0, offsetX = 0, offsetY = 0},
 		["fleetway losing"] = {start = 48, stop = 48, speed = 0, offsetX = 0, offsetY = 0},
 		["coldsteel"] = {start = 49, stop = 49, speed = 0, offsetX = 0, offsetY = 0},
-		["coldsteel losing"] = {start = 50, stop = 50, speed = 0, offsetX = 0, offsetY = 0}
+		["coldsteel losing"] = {start = 50, stop = 50, speed = 0, offsetX = 0, offsetY = 0},
+		--holy fucking shit
+		["EXEmergeidleNormalPHASEONE"] = {start = 51, stop = 51, speed = 0, offsetX = 0, offsetY = 0},
+		["EXEmergeidleWinningPHASEONE"] = {start = 52, stop = 52, speed = 0, offsetX = 0, offsetY = 0},
+		["EXEmergerightWinningPHASEONE"] = {start = 53, stop = 53, speed = 0, offsetX = 0, offsetY = 0},
+		["EXEmergerightNormalPHASEONE"] = {start = 54, stop = 54, speed = 0, offsetX = 0, offsetY = 0},
+		["EXEmergeupWinningPHASEONE"] = {start = 55, stop = 55, speed = 0, offsetX = 0, offsetY = 0},
+		["EXEmergeupNormalPHASEONE"] = {start = 56, stop = 56, speed = 0, offsetX = 0, offsetY = 0},
+		["EXEmergedownWinningPHASEONE"] = {start = 57, stop = 57, speed = 0, offsetX = 0, offsetY = 0},
+		["EXEmergedownNormalPHASEONE"] = {start = 58, stop = 58, speed = 0, offsetX = 0, offsetY = 0},
+		["EXEmergeleftWinningPHASEONE"] = {start = 59, stop = 59, speed = 0, offsetX = 0, offsetY = 0},
+		["EXEmergeleftNormalPHASEONE"] = {start = 60, stop = 60, speed = 0, offsetX = 0, offsetY = 0},
+		["EXEmergeidleNormalPHASETWO"] = {start = 61, stop = 61, speed = 0, offsetX = 0, offsetY = 0},
+		["EXEmergeidleNormalPHASERED"] = {start = 62, stop = 62, speed = 0, offsetX = 0, offsetY = 0},
+		["bf EXEmerge awesome"] = {start = 63, stop = 63, speed = 0, offsetX = 0, offsetY = 0},
+		["bf EXEmerge awesome losing"] = {start = 64, stop = 64, speed = 0, offsetX = 0, offsetY = 0},
+		["bf EXEmerge"] = {start = 65, stop = 65, speed = 0, offsetX = 0, offsetY = 0},
+		["bf EXEmerge losing"] = {start = 66, stop = 66, speed = 0, offsetX = 0, offsetY = 0},
+		["24XNormal"] = {start = 67, stop = 67, speed = 0, offsetX = 0, offsetY = 0},
+		["24XLosing"] = {start = 68, stop = 68, speed = 0, offsetX = 0, offsetY = 0},
+		["24SpookyNormal"] = {start = 69, stop = 69, speed = 0, offsetX = 0, offsetY = 0},
+		["24REALsonicNormal"] = {start = 70, stop = 70, speed = 0, offsetX = 0, offsetY = 0},
+		["24REALsonicLosing"] = {start = 71, stop = 71, speed = 0, offsetX = 0, offsetY = 0}
 	},
 	"boyfriend",
 	false

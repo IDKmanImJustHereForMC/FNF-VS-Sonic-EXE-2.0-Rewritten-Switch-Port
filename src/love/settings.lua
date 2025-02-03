@@ -36,7 +36,11 @@ volume=1.0
 dfjk=true
 
 ; "Downscroll" makes arrows scroll down instead of up, and also moves some aspects of the UI around
-downscroll=false
+downscroll=true
+
+; Combines middlescroll and downscroll
+; Set downscroll to false if enabled
+middledownscroll=false
 
 ; "Kade Input" disables anti-spam, but counts "Shit" inputs as misses
 ; NOTE: Currently unfinished, some aspects of this input mode still need to be implemented, like mash violations
@@ -79,7 +83,11 @@ volume=1.0
 dfjk=true
 
 ; "Downscroll" makes arrows scroll down instead of up, and also moves some aspects of the UI around
-downscroll=false
+downscroll=true
+
+; Combines middlescroll and downscroll
+; Set downscroll to false if enabled
+middledownscroll=false
 
 ; "Kade Input" disables anti-spam, but counts "Shit" inputs as misses
 ; NOTE: Currently unfinished, some aspects of this input mode still need to be implemented, like mash violations
@@ -140,6 +148,11 @@ if curOS == "NX" then
 		settings.kadeInput = true
 	else
 		settings.kadeInput = false
+	end
+	if ini.readKey(settingsIni, "Game", "middledownscroll") == "true" then
+		settings.middlescroll = true
+	else
+		settings.middlescroll = false
 	end
 
 	if ini.readKey(settingsIni, "Advanced", "showDebug") == "fps" or ini.readKey(settingsIni, "Advanced", "showDebug") == "detailed" then
@@ -226,6 +239,11 @@ else
 		settings.downscroll = true
 	else
 		settings.downscroll = false
+	end
+	if ini.readKey(settingsIni, "Game", "middledownscroll") == "true" then
+		settings.middlescroll = true
+	else
+		settings.middlescroll = false
 	end
 
 	if ini.readKey(settingsIni, "Game", "kadeInput") == "true" then

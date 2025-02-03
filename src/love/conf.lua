@@ -18,7 +18,7 @@ along with this program.  If not, see <https://www.gnu.org/licenses/>.
 ------------------------------------------------------------------------------]]
 
 function love.conf(t)
-	t.identity = "funkin-rewritten"
+	t.identity = "funkin-rewritten-exewaow"
 	t.version = "11.3"
 	--t.console = true
 

@@ -21,8 +21,7 @@ local animList = {
 	"left",
 	"down",
 	"up",
-	"right",
-	"right alt"
+	"right"
 }
 local inputList = {
 	"gameLeft",
@@ -66,6 +65,11 @@ return {
 
 		girlfriend = love.filesystem.load("sprites/girlfriend.lua")()
 		boyfriend = love.filesystem.load("sprites/boyfriend.lua")()
+		fakeEnemy1 = enemy
+		fakeEnemy2 = enemy
+		fakeEnemy3 = enemy
+		fakeEnemy4 = enemy
+		fakePlayer1 = boyfriend
 
 		rating = love.filesystem.load("sprites/rating.lua")()
 
@@ -80,7 +84,7 @@ return {
 		enemyIcon = sprites.icons()
 		boyfriendIcon = sprites.icons()
 
-		if settings.downscroll then
+		if settings.downscroll or settings.middlescroll then
 			enemyIcon.y = -400
 			boyfriendIcon.y = -400
 		else
@@ -111,6 +115,19 @@ return {
 		combo = 0
 
 		enemy:animate("idle")
+		if fakeEnemiesPresent then
+			fakeEnemy1:animate("idle")
+			fakeEnemy2:animate("idle")
+			fakeEnemy3:animate("idle")
+			if fakeEnemyTypeEM then
+				fakeEnemy4:animate("idle")
+			end
+		end
+		if fakePlayersPresent then
+			if fakePlayerCount >= 1 then --Probably could've made this just a true/false and have it default to only one.
+				fakePlayer1:animate("idle")
+			end
+		end
 		boyfriend:animate("idle")
 
 		graphics.fadeIn(0.5)
@@ -122,6 +139,14 @@ return {
 		boyfriendNotes = {}
 		health = 50
 		score = 0
+		healthGainAMT = 1
+	
+		fcStatus = "Nothing Hit Yet!"
+		goodsCount = 0
+		badsCount = 0
+		shitsCount = 0
+		missesCount = 0
+		
 
 		sprites.leftArrow = love.filesystem.load("sprites/left-arrow.lua")
 		sprites.downArrow = love.filesystem.load("sprites/down-arrow.lua")
@@ -142,9 +167,14 @@ return {
 		}
 
 		for i = 1, 4 do
-			enemyArrows[i].x = -925 + 165 * i
-			boyfriendArrows[i].x = 100 + 165 * i
-			if settings.downscroll then
+			if settings.middlescroll then
+				enemyArrows[i].x = -99999 + 165 * i
+				boyfriendArrows[i].x = -400 + 165 * i
+			else
+				enemyArrows[i].x = -925 + 165 * i
+				boyfriendArrows[i].x = 100 + 165 * i
+			end
+			if settings.downscroll or settings.middlescroll then
 				enemyArrows[i].y = 400
 				boyfriendArrows[i].y = 400
 			else
@@ -198,7 +228,7 @@ return {
 					sprite = sprites.rightArrow
 				end
 
-				if settings.downscroll then
+				if settings.downscroll or settings.middlescroll then
 					if mustHitSection then
 						if noteType >= 4 then
 							local id = noteType - 3
@@ -463,7 +493,7 @@ return {
 			end
 		end
 
-		if settings.downscroll then
+		if settings.downscroll or settings.middlescroll then
 			for i = 1, 4 do
 				table.sort(enemyNotes[i], function(a, b) return a.y > b.y end)
 				table.sort(boyfriendNotes[i], function(a, b) return a.y > b.y end)
@@ -482,7 +512,7 @@ return {
 			for j = 2, #enemyNotes[i] do
 				local index = j - offset
 
-				if enemyNotes[i][index]:getAnimName() == "on" and enemyNotes[i][index - 1]:getAnimName() == "on" and ((not settings.downscroll and enemyNotes[i][index].y - enemyNotes[i][index - 1].y <= 10) or (settings.downscroll and enemyNotes[i][index].y - enemyNotes[i][index - 1].y >= -10)) then
+				if enemyNotes[i][index]:getAnimName() == "on" and enemyNotes[i][index - 1]:getAnimName() == "on" and ((not settings.downscroll and not settings.middlescroll and enemyNotes[i][index].y - enemyNotes[i][index - 1].y <= 10) or (settings.downscroll or settings.middlescroll and enemyNotes[i][index].y - enemyNotes[i][index - 1].y >= -10)) then
 					table.remove(enemyNotes[i], index)
 
 					offset = offset + 1
@@ -495,7 +525,7 @@ return {
 			for j = 2, #boyfriendNotes[i] do
 				local index = j - offset
 
-				if boyfriendNotes[i][index]:getAnimName() == "on" and boyfriendNotes[i][index - 1]:getAnimName() == "on" and ((not settings.downscroll and boyfriendNotes[i][index].y - boyfriendNotes[i][index - 1].y <= 10) or (settings.downscroll and boyfriendNotes[i][index].y - boyfriendNotes[i][index - 1].y >= -10)) then
+				if boyfriendNotes[i][index]:getAnimName() == "on" and boyfriendNotes[i][index - 1]:getAnimName() == "on" and ((not settings.downscroll and not settings.middlescroll and boyfriendNotes[i][index].y - boyfriendNotes[i][index - 1].y <= 10) or (settings.downscroll or settings.middlescroll and boyfriendNotes[i][index].y - boyfriendNotes[i][index - 1].y >= -10)) then
 					table.remove(boyfriendNotes[i], index)
 
 					offset = offset + 1
@@ -589,6 +619,54 @@ return {
 		absMusicTime = math.abs(musicTime)
 		musicThres = math.floor(absMusicTime / 100) -- Since "musicTime" isn't precise, this is needed
 
+		--MustHitSection camera zoom logic
+		--Hits an area around the camzoom instead of on it exactly to prevent jitter
+		if isPlayerTurn and not isEnemyTurn then
+			--make sure the camera doesnt look moronic
+			camScale.x, camScale.y = cam.sizeX, cam.sizeY
+			if cam.sizeX > playerZoom + (playerZoom * 0.005) then --Check if the camera's zoom is around greater than the player zoom, checking cam.sizeX is easiest
+				--Gradually zoom in until equal
+				cam.sizeX, cam.sizeY = cam.sizeX - 0.005, cam.sizeY - 0.005
+			elseif cam.sizeX < playerZoom - (playerZoom * 0.005) then --Same as the first step, but less instead
+				--Gradually zoom out until equal
+				cam.sizeX, cam.sizeY = cam.sizeX + 0.005, cam.sizeY + 0.005
+			end
+		end
+		if isEnemyTurn and not isPlayerTurn then
+			--Copy paste of player zoom, but for enemy
+			camScale.x, camScale.y = cam.sizeX, cam.sizeY
+			if cam.sizeX > enemyZoom + (enemyZoom * 0.005) then
+				cam.sizeX, cam.sizeY = cam.sizeX - 0.005, cam.sizeY - 0.005
+			elseif cam.sizeX < enemyZoom - (enemyZoom * 0.005) then
+				cam.sizeX, cam.sizeY = cam.sizeX + 0.005, cam.sizeY + 0.005
+			end
+		end
+
+		--FC detection
+		if sickWasHit and not goodWasHit and not badWasHit and not shitWasHit and not hasMissed then
+			fcStatus = "SFC"
+		end
+		if goodWasHit and not badWasHit and not shitWasHit and not hasMissed then
+			if goodsCount >= 10 then
+				fcStatus = "GFC"
+			else
+				fcStatus = "SDG"
+			end
+		end
+		if badWasHit == true and not shitWasHit and not hasMissed then
+			if badsCount >= 10 then
+				fcStatus = "FC"
+			else
+				fcStatus = "SDB"
+			end
+		end
+		if shitWasHit == true or hasMissed == true then
+			if missesCount + shitsCount >= 10 then
+				fcStatus = "CLEAR"
+			else
+				fcStatus = "SDCB"
+			end
+		end
 		for i = 1, #events do
 			if events[i].eventTime <= absMusicTime then
 				local oldBpm = bpm
@@ -601,10 +679,17 @@ return {
 				if camTimer then
 					Timer.cancel(camTimer)
 				end
+
+
 				if events[i].mustHitSection then
-					camTimer = Timer.tween(1.25, cam, {x = -boyfriend.x + 100, y = -boyfriend.y + 75}, "out-quad")
+					camTimer = Timer.tween(1.25, cam, {x = -boyfriend.x + 100, y = -boyfriend.y + playerCamOffsetY}, "out-quad")
+					isPlayerTurn = true
+					isEnemyTurn = false
+					
 				else
-					camTimer = Timer.tween(1.25, cam, {x = -enemy.x - 100, y = -enemy.y + 75}, "out-quad")
+					camTimer = Timer.tween(1.25, cam, {x = -enemy.x - 100, y = -enemy.y + enemyCamOffsetY}, "out-quad")
+					isEnemyTurn = true
+					isPlayerTurn = false
 				end
 
 				if events[i].altAnim then
@@ -620,14 +705,29 @@ return {
 		end
 
 		if musicThres ~= oldMusicThres and math.fmod(absMusicTime, 240000 / bpm) < 100 then
-			if camScaleTimer then Timer.cancel(camScaleTimer) end
+			if camScaleTimer then --Spread it out so I can understand it more srry
+				Timer.cancel(camScaleTimer) 
+			end
 
-			camScaleTimer = Timer.tween((60 / bpm) / 16, cam, {sizeX = camScale.x * 1.05, sizeY = camScale.y * 1.05}, "out-quad", function() camScaleTimer = Timer.tween((60 / bpm), cam, {sizeX = camScale.x, sizeY = camScale.y}, "out-quad") end)
+			camScaleTimer = Timer.tween((camBumpRate / bpm) / 16, cam, {sizeX = camScale.x * 1.05, sizeY = camScale.y * 1.05}, "out-quad", function() camScaleTimer = Timer.tween((camBumpRate / bpm), cam, {sizeX = camScale.x, sizeY = camScale.y}, "out-quad") end)
 		end
 
 		girlfriend:update(dt)
 		enemy:update(dt)
+		if fakeEnemiesPresent then
+			fakeEnemy1:update(dt)
+			fakeEnemy2:update(dt)
+			fakeEnemy3:update(dt)
+			if fakeEnemyTypeEM then
+				fakeEnemy4:update(dt)
+			end
+		end
 		boyfriend:update(dt)
+		if fakePlayersPresent then
+			if fakePlayerCount >=1 then
+				fakePlayer1:update(dt)
+			end
+		end
 
 		if musicThres ~= oldMusicThres and math.fmod(absMusicTime, 120000 / bpm) < 100 then
 			if spriteTimers[1] == 0 then
@@ -636,10 +736,25 @@ return {
 				girlfriend:setAnimSpeed(14.4 / (60 / bpm))
 			end
 			if spriteTimers[2] == 0 then
-				self:safeAnimate(enemy, "idle", false, 2)
+				if animInterrupts then
+					self:safeAnimate(enemy, "idle", false, 2)
+				end
+				if fakeEnemiesPresent then
+					self:safeAnimate(fakeEnemy1, "idle", false, 2)
+					self:safeAnimate(fakeEnemy2, "idle", false, 2)
+					self:safeAnimate(fakeEnemy3, "idle", false, 2)
+					if fakeEnemyTypeEM then
+						self:safeAnimate(fakeEnemy4, "idle", false, 2)
+					end
+				end
 			end
 			if spriteTimers[3] == 0 then
 				self:safeAnimate(boyfriend, "idle", false, 3)
+				if fakePlayersPresent then
+					if fakePlayerCount >= 1 then
+						self:safeAnimate(fakePlayer1, "idle", false, 3)
+					end
+				end
 			end
 		end
 
@@ -653,7 +768,7 @@ return {
 	end,
 
 	updateUI = function(self, dt)
-		if settings.downscroll then
+		if settings.downscroll or settings.middlescroll then
 			musicPos = -musicTime * 0.6 * speed
 		else
 			musicPos = musicTime * 0.6 * speed
@@ -677,22 +792,76 @@ return {
 			end
 
 			if #enemyNote > 0 then
-				if (not settings.downscroll and enemyNote[1].y - musicPos <= -400) or (settings.downscroll and enemyNote[1].y - musicPos >= 400) then
+				if (not settings.downscroll and not settings.middlescroll and enemyNote[1].y - musicPos <= -400) or (settings.downscroll or settings.middlescroll and enemyNote[1].y - musicPos >= 400) then
 					voices:setVolume(1)
 
 					enemyArrow:animate("confirm", false)
 
 					if enemyNote[1]:getAnimName() == "hold" or enemyNote[1]:getAnimName() == "end" then
 						if useAltAnims then
-							if (not enemy:isAnimated()) or enemy:getAnimName() == "idle" then self:safeAnimate(enemy, curAnim .. " alt", true, 2) end
+							if (not enemy:isAnimated()) or enemy:getAnimName() == "idle" then --Separated this string so it's easier to read on my part
+								self:safeAnimate(enemy, curAnim .. " alt", true, 2)
+							end
+							if fakeEnemiesPresent then
+								if (not fakeEnemy1:isAnimated()) or fakeEnemy1:getAnimName() == "idle" then 
+									self:safeAnimate(fakeEnemy1, curAnim, true, 2) --Not giving them alt anims cus be honest you didnt give them any
+								end
+								if (not fakeEnemy2:isAnimated()) or fakeEnemy2:getAnimName() == "idle" then 
+									self:safeAnimate(fakeEnemy2, curAnim, true, 2) --am i the only one who thinks "enemy" starting Capitalized looks wierd?
+								end
+								if (not fakeEnemy3:isAnimated()) or fakeEnemy3:getAnimName() == "idle" then 
+									self:safeAnimate(fakeEnemy3, curAnim, true, 2) --Like, Enemy
+								end
+								if fakeEnemyTypeEM then
+									if (not fakeEnemy4:isAnimated()) or fakeEnemy4:getAnimName() == "idle" then 
+										self:safeAnimate(fakeEnemy4, curAnim, true, 2) --yeah maybe its just me
+									end
+								end
+							end
 						else
-							if (not enemy:isAnimated()) or enemy:getAnimName() == "idle" then self:safeAnimate(enemy, curAnim, true, 2) end
+							if (not enemy:isAnimated()) or enemy:getAnimName() == "idle" then 
+								if animInterrupts then
+									self:safeAnimate(enemy, curAnim, true, 2)
+								end
+							end
+							if fakeEnemiesPresent then
+								if (not fakeEnemy1:isAnimated()) or fakeEnemy1:getAnimName() == "idle" then 
+									self:safeAnimate(fakeEnemy1, curAnim, true, 2)
+								end
+								if (not fakeEnemy2:isAnimated()) or fakeEnemy2:getAnimName() == "idle" then 
+									self:safeAnimate(fakeEnemy2, curAnim, true, 2)
+								end
+								if (not fakeEnemy3:isAnimated()) or fakeEnemy3:getAnimName() == "idle" then 
+									self:safeAnimate(fakeEnemy3, curAnim, true, 2)
+								end
+								if fakeEnemyTypeEM then
+									if (not fakeEnemy4:isAnimated()) or fakeEnemy4:getAnimName() == "idle" then 
+										self:safeAnimate(fakeEnemy4, curAnim, true, 2)
+									end
+								end
+							end
 						end
 					else
 						if useAltAnims then
 							self:safeAnimate(enemy, curAnim .. " alt", false, 2)
+							if fakeEnemiesPresent then
+								self:safeAnimate(fakeEnemy1, curAnim, false, 2)
+								self:safeAnimate(fakeEnemy2, curAnim, false, 2)
+								self:safeAnimate(fakeEnemy3, curAnim, false, 2)
+								if fakeEnemyTypeEM then
+									self:safeAnimate(fakeEnemy4, curAnim, false, 2)
+								end
+							end
 						else
 							self:safeAnimate(enemy, curAnim, false, 2)
+							if fakeEnemiesPresent then
+								self:safeAnimate(fakeEnemy1, curAnim, false, 2)
+								self:safeAnimate(fakeEnemy2, curAnim, false, 2)
+								self:safeAnimate(fakeEnemy3, curAnim, false, 2)
+								if fakeEnemyTypeEM then
+									self:safeAnimate(fakeEnemy4, curAnim, false, 2)
+								end
+							end
 						end
 					end
 
@@ -701,17 +870,18 @@ return {
 			end
 
 			if #boyfriendNote > 0 then
-				if (not settings.downscroll and boyfriendNote[1].y - musicPos < -500) or (settings.downscroll and boyfriendNote[1].y - musicPos > 500) then
+				if (not settings.downscroll and not settings.middlescroll and boyfriendNote[1].y - musicPos < -500) or (settings.downscroll or settings.middlescroll and boyfriendNote[1].y - musicPos > 500) then
 					if inst then voices:setVolume(0) end
 
 					notMissed[noteNum] = false
 
 					table.remove(boyfriendNote, 1)
 
-					if combo >= 5 then self:safeAnimate(girlfriend, "sad", true, 1) end
+					if combo >= 5 and traditionalGF then self:safeAnimate(girlfriend, "sad", true, 1) end
 
 					combo = 0
-					health = health - 1
+					--revert this when not testing
+					health = health - 0
 				end
 			end
 
@@ -727,13 +897,13 @@ return {
 				if #boyfriendNote > 0 then
 					for i = 1, #boyfriendNote do
 						if boyfriendNote[i] and boyfriendNote[i]:getAnimName() == "on" then
-							if (not settings.downscroll and boyfriendNote[i].y - musicPos <= -280) or (settings.downscroll and boyfriendNote[i].y - musicPos >= 280) then
+							if (not settings.downscroll and not settings.middlescroll and boyfriendNote[i].y - musicPos <= -280) or (settings.downscroll or settings.middlescroll and boyfriendNote[i].y - musicPos >= 280) then
 								local notePos
 								local ratingAnim
 
 								notMissed[noteNum] = true
 
-								if settings.downscroll then
+								if settings.downscroll or settings.middlescroll then
 									notePos = math.abs(400 - (boyfriendNote[i].y - musicPos))
 								else
 									notePos = math.abs(-400 - (boyfriendNote[i].y - musicPos))
@@ -741,22 +911,34 @@ return {
 
 								voices:setVolume(1)
 
+								--Frame timings fucking suck, manually tried tweaking this but still shit
 								if notePos <= 50 then -- "Sick"
 									score = score + 350
 									ratingAnim = "sick"
+									sickWasHit = true
+									healthBurstCount = healthBurstCount + 1
 								elseif notePos <= 110 then -- "Good"
 									score = score + 200
 									ratingAnim = "good"
+									goodWasHit = true
+									goodsCount = goodsCount + 1
+									healthBurstCount = healthBurstCount + 1
 								elseif notePos <= 130 then -- "Bad"
 									score = score + 100
 									ratingAnim = "bad"
+									badWasHit = true
+									badsCount = badsCount + 1
+									healthBurstCount = healthBurstCount + 1
 								else -- "Shit"
 									if settings.kadeInput then
 										success = false
 									else
 										score = score + 50
+										healthBurstCount = healthBurstCount + 1
 									end
 									ratingAnim = "shit"
+									shitWasHit = true
+									shitsCount = shitsCount + 1
 								end
 								combo = combo + 1
 
@@ -787,8 +969,13 @@ return {
 									boyfriendArrow:animate("confirm", false)
 
 									self:safeAnimate(boyfriend, curAnim, false, 3)
+									if fakePlayersPresent then
+										if fakePlayerCount >= 1 then
+											self:safeAnimate(fakePlayer1, curAnim, false, 3)
+										end
+									end
 
-									health = health + 1
+									health = health + healthGainAMT
 
 									success = true
 								end
@@ -804,17 +991,28 @@ return {
 
 					notMissed[noteNum] = false
 
-					if combo >= 5 then self:safeAnimate(girlfriend, "sad", true, 1) end
+					if combo >= 5 and traditionalGF == true then self:safeAnimate(girlfriend, "sad", true, 1) end
 
 					self:safeAnimate(boyfriend, "miss " .. curAnim, false, 3)
 
+					if fakePlayersPresent then
+						if fakePlayerCount >= 1 then
+							self:safeAnimate(fakePlayer1, "miss " .. curAnim, false, 3)
+						end
+					end
+
+					hasMissed = true
+					missesCount = missesCount + 1
+					healthBurstCount = 0
+
 					score = score - 10
 					combo = 0
-					health = health - 1
+					--revert when not testing
+					health = health - 0
 				end
 			end
 
-			if notMissed[noteNum] and #boyfriendNote > 0 and input:down(curInput) and ((not settings.downscroll and boyfriendNote[1].y - musicPos <= -400) or (settings.downscroll and boyfriendNote[1].y - musicPos >= 400)) and (boyfriendNote[1]:getAnimName() == "hold" or boyfriendNote[1]:getAnimName() == "end") then
+			if notMissed[noteNum] and #boyfriendNote > 0 and input:down(curInput) and ((not settings.downscroll and not settings.middlescroll and boyfriendNote[1].y - musicPos <= -400) or (settings.downscroll or settings.middlescroll and boyfriendNote[1].y - musicPos >= 400)) and (boyfriendNote[1]:getAnimName() == "hold" or boyfriendNote[1]:getAnimName() == "end") then
 				voices:setVolume(1)
 
 				table.remove(boyfriendNote, 1)
@@ -822,8 +1020,16 @@ return {
 				boyfriendArrow:animate("confirm", false)
 
 				if (not boyfriend:isAnimated()) or boyfriend:getAnimName() == "idle" then self:safeAnimate(boyfriend, curAnim, true, 3) end
+
+				if fakePlayersPresent then
+					if fakePlayerCount >=1 then
+						if (not fakePlayer1:isAnimated()) or fakePlayer1:getAnimName() == "idle" then 
+							self:safeAnimate(fakePlayer1, curAnim, true, 3) 
+						end
+					end
+				end
 				
-			    health = health + 1
+			    health = health + healthGainAMT
 			end
 
 			if input:released(curInput) then
@@ -894,7 +1100,7 @@ return {
 					love.graphics.translate(0, -musicPos)
 
 					for j = #enemyNotes[i], 1, -1 do
-						if (not settings.downscroll and enemyNotes[i][j].y - musicPos <= 560) or (settings.downscroll and enemyNotes[i][j].y - musicPos >= -560) then
+						if (not settings.downscroll and not settings.middlescroll and enemyNotes[i][j].y - musicPos <= 560) or (settings.downscroll or settings.middlescroll and enemyNotes[i][j].y - musicPos >= -560) then
 							local animName = enemyNotes[i][j]:getAnimName()
 
 							if animName == "hold" or animName == "end" then
@@ -905,10 +1111,10 @@ return {
 						end
 					end
 					for j = #boyfriendNotes[i], 1, -1 do
-						if (not settings.downscroll and boyfriendNotes[i][j].y - musicPos <= 560) or (settings.downscroll and boyfriendNotes[i][j].y - musicPos >= -560) then
+						if (not settings.downscroll and not settings.middlescroll and boyfriendNotes[i][j].y - musicPos <= 560) or (settings.downscroll or settings.middlescroll and boyfriendNotes[i][j].y - musicPos >= -560) then
 							local animName = boyfriendNotes[i][j]:getAnimName()
 
-							if settings.downscroll then
+							if settings.downscroll or settings.middlescroll then
 								if animName == "hold" or animName == "end" then
 									graphics.setColor(1, 1, 1, math.min(0.5, (500 - (boyfriendNotes[i][j].y - musicPos)) / 150))
 								else
@@ -928,7 +1134,7 @@ return {
 				love.graphics.pop()
 			end
 
-			if settings.downscroll then
+			if settings.downscroll or settings.middlescroll then
 				graphics.setColor(1, 0, 0)
 				love.graphics.rectangle("fill", -500, -400, 1000, 25)
 				graphics.setColor(0, 1, 0)
@@ -953,10 +1159,12 @@ return {
 			boyfriendIcon:draw()
 			enemyIcon:draw()
 
-			if settings.downscroll then
+			if settings.downscroll or settings.middlescroll then
 				love.graphics.print("Score: " .. score, 300, -350)
+				love.graphics.print("Status: " ..tostring(fcStatus), -500, -350)
 			else
 				love.graphics.print("Score: " .. score, 300, 400)
+				love.graphics.print("Status: " ..tostring(fcStatus), -500, 400)
 			end
 
 			graphics.setColor(1, 1, 1, countdownFade[1])

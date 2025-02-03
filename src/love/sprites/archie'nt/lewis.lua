@@ -1,5 +1,5 @@
 return graphics.newSprite(
-	love.graphics.newImage(graphics.imagePath("archie'nt/Porker Lewis")),
+	love.graphics.newImage(graphics.imagePath("archie'nt/Porker-Lewis")),
 
 	-- Automatically generated from Porker Lewis.xml
 	{

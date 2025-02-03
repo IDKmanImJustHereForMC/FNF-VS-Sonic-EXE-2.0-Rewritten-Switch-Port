@@ -1534,7 +1534,7 @@ return {
 			},
 			{
 				noteTime = 47142,
-				noteType = 5,
+				noteType = 5, --Was 5
 				noteLength = 0
 			},
 			{

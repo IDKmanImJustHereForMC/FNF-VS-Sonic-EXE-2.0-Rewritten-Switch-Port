@@ -60,7 +60,8 @@ function love.load()
 		require "weeks.saturn",
 		require "weeks.archie'nt",
 		require "weeks.0K_Fe",
-		require "weeks.obfun"
+		require "weeks.24",
+		require "weeks.merge"
 	}
 
 	-- LÖVE init
@@ -94,6 +95,32 @@ function love.load()
 	musicTime = 0
 	health = 0
 
+	healthGainAMT = 1 --Controls health gain
+	healthBurstCount = 0
+
+	--custom global variables that should allow for camera zoom in(s) on Must Hit Sections
+	playerZoom = 0.9
+	enemyZoom = 0.9
+	isEnemyTurn = false
+	isPlayerTurn = false
+
+	--for use offsetting the y position of the camera for certain characters
+	--doesnt work
+	playerCamOffsetY = 75
+	enemyCamOffsetY = 75
+
+	--Misc Flags
+	traditionalGF = true --Used to prevent the sad animation from playing if false.
+	BFcanDie = true --If false, prevents death anims playing in the event the character would break once done so. (In short, it's a failsafe for characters who dont have death sprites)
+	fakeEnemiesPresent = false --Disable fake enemy logic for songs where there is none.
+	fakeEnemyTypeEM = false --Only the amount of Fakes in Triple Trouble by default. Ups the Fakes to 4 when true. (Triple Trouble has 3 fakes) (Req. fakeEnemiesPresent)
+	tooFestDeath = false --Triggers unused code cus i cant figure it out.
+	fakePlayersPresent = false --Disables fake player logic when false.
+	fakePlayerCount = 1 --Amount of fake players, if enabled (up to 2 currently) (1 is used for TT, 2 is used for EM Black Sun). (Req. fakePlayersPresent)
+	camBumpRate = 60 --Doesn't work. Was inserted into the cam bump code with the intent of interchangabale cam bump speeds
+	animInterrupts = true --Stops anims from being interrupted by Idle when false
+	closeOnDeath = false --Closes the game on death while true.
+
 	if curOS == "Web" then
 		Gamestate.switch(clickStart)
 	else
@@ -112,6 +139,13 @@ function love.keypressed(key)
 		love.graphics.captureScreenshot("screenshots/" .. os.time() .. ".png")
 	elseif key == "7" then
 		Gamestate.switch(debugMenu)
+	elseif key == "0" then
+		--debug that instantly ends a song
+		inst:stop()
+		voices:stop()
+	elseif key == "9" then
+		--debug that kills the player
+		health = -1
 	else
 		Gamestate.keypressed(key)
 	end

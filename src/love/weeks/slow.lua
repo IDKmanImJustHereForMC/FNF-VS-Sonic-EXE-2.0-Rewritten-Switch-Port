@@ -1,7 +1,7 @@
 --For whats supposed to be optimized, this is not well optimized
 local song, difficulty
 
-local wayBack, stageBack, stageMid, stageFront, curtains, egg, knuck, tail, jumpscaryalert, jumpy, IntroCircle, IntroText
+local wayBack, stageBack, stageMid, stageFront, curtains, egg, knuck, tail, jumpscaryalert, jumpy, IntroCircle, IntroText, cinema
 
 return {
 	enter = function(self, from, songNum, songAppend)
@@ -9,7 +9,15 @@ return {
 
 		song = songNum
 		difficulty = songAppend
-		cam.sizeX, cam.sizeY = 0.85, 0.85
+
+		--Event Flags
+		eventOnePassed = false
+		eventTwoPassed = false
+		eventThreePassed = false
+		eventFourPassed = false
+		eventFivePassed = false
+		eventSixPassed = false
+		camTranslateInit = false
 
 		wayBack = graphics.newImage(love.graphics.newImage(graphics.imagePath("slow/SKY")))
 		stageBack = graphics.newImage(love.graphics.newImage(graphics.imagePath("slow/HILLS")))
@@ -22,8 +30,11 @@ return {
 		jumpscaryalert = graphics.newImage(love.graphics.newImage(graphics.imagePath("slow/OOGABOOGA")))
 		IntroCircle = graphics.newImage(love.graphics.newImage(graphics.imagePath("slow/CircleTooSlow")))
 		IntroText = graphics.newImage(love.graphics.newImage(graphics.imagePath("slow/TextTooSlow")))
+		cinema = graphics.newImage(love.graphics.newImage(graphics.imagePath("slow/cinema")))
 		
-
+		--pleasepleasepleasepleaseplease
+		screenwidth = love.graphics.getWidth()
+		screenheight = love.graphics.getHeight()
 		wayBack.y = 20
 		stageBack.y = 20
 		stageMid.y = 50
@@ -32,9 +43,10 @@ return {
 		egg.x, egg.y = -30, 50
 		knuck.x, knuck.y = 400, 50
 		tail.y = 50
+		cinema.x, cinema.y = cam.x + screenwidth/2, cam.y + screenheight/2
 		--Why is it like this
-		IntroCircle.y, IntroCircle.x = cam.y + 300,  cam.x - 400
-		IntroText.y, IntroText.x = cam.y + 300, cam.x + 1700
+		IntroCircle.y, IntroCircle.x = cam.y + screenheight/2,  cam.x - screenwidth/2.5
+		IntroText.y, IntroText.x = cam.y + screenheight/2, cam.x + screenwidth/0.75
 		
 
 		--Off to the void with ye!!!!
@@ -83,80 +95,100 @@ return {
 	update = function(self, dt)
 		weeks:update(dt)
 		tails:update(dt)
+		jumpy:update(dt)
 
 	--Intro stuff????
- --The effectiveness of this depends on your framerate, luckily, the framerate will be stable... right?
-	--No don't run every frame
-	if musicTime <= 8000 then
+	--Wanted to make it stop in the middle for a bit but fuck me ig
+	if musicTime <= 3000 then
 		if musicTime >= 0 then
-			if musicTime <= 4000 then
-				IntroCircle.x = IntroCircle.x + 15
-				IntroText.x = IntroText.x - 15
-			end
-			if musicTime >= 4500 then
-				if musicTime <= 8000 then
-					IntroCircle.x = IntroCircle.x + 15
-					IntroText.x = IntroText.x - 15
-				end
+			IntroCircle.x = IntroCircle.x + 15
+			IntroText.x = IntroText.x - 15
+			if cinema.sizeY <= 4 then
+				cinema.sizeY = cinema.sizeY + 0.01
 			end
 		end
 	end
 
 	--JUMPSCARES!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
-	--There has to be a cleaner way to do it, but better dusty than completely covered in mud
- --The effectiveness changes based on window size/aspect ratio, this WILL bite me back in the ass later, but I don't know how to fix it
- --We'll cross that road when we get there
-	if musicTime >= (97700) then
+	if not eventOnePassed then
+		if musicTime >= (97700) then
 			if musicTime <= (97700 + 300) then
-
-			oogabooga:play()
-			jumpscaryalert.x, jumpscaryalert.y = cam.x + 1000, cam.y + 500
-
+				oogabooga:play()
+				jumpscaryalert.x, jumpscaryalert.y = cam.x + 1000, cam.y + 500
 			else
-
-			jumpscaryalert.x, jumpscaryalert.y = offx, offy
-
-		end 
-	end 
-
-	if musicTime >= (118990) then
-			if musicTime <= (118990 + 300) then
-
-			oogabooga:play()
-			jumpscaryalert.x, jumpscaryalert.y = cam.x + 1000, cam.y + 500
-
-			else
-
-			jumpscaryalert.x, jumpscaryalert.y = offx, offy
-
+				jumpscaryalert.x, jumpscaryalert.y = offx, offy
+				eventOnePassed = true
+			end 
 		end 
 	end
 
-	if musicTime >= (132250) then
-			if musicTime <= (132250 + 300) then
-
-			oogabooga:play()
-			jumpscaryalert.x, jumpscaryalert.y = cam.x + 1000, cam.y + 500
-
+	if eventOnePassed and not eventTwoPassed then
+		if musicTime >= (118990) then
+			if musicTime <= (118990 + 300) then
+				oogabooga:play()
+				jumpscaryalert.x, jumpscaryalert.y = cam.x + 1000, cam.y + 500
 			else
+				jumpscaryalert.x, jumpscaryalert.y = offx, offy
+				eventTwoPassed = true
+			end 
+		end
+	end
 
-			jumpscaryalert.x, jumpscaryalert.y = offx, offy
+	if eventTwoPassed and not eventThreePassed then
+		if musicTime >= 129555 then
+			animInterrupts = false
+			enemyZoom = 1
+			if cinema.sizeY > 1.2 then
+				cinema.sizeY = cinema.sizeY - 0.05
+			end
+			if not camTranslateInit then
+				camTimer = Timer.tween(1.25, cam, {x = -enemy.x - 100, y = -enemy.y + enemyCamOffsetY}, "out-quad")
+				isEnemyTurn = true
+				isPlayerTurn = false
+				camTranslateInit = true
+			end
+		end
+		if musicTime >= 130500 and camTranslateInit and cinema.sizeY <= 1.2 then
+			eventThreePassed = true
+		end
+	end
 
-		end 
+	if eventThreePassed and not eventFourPassed then
+		if musicTime >= (132250) then
+			if musicTime <= (132250 + 300) then
+				oogabooga:play()
+				jumpscaryalert.x, jumpscaryalert.y = cam.x + 1000, cam.y + 500
+			else
+				jumpscaryalert.x, jumpscaryalert.y = offx, offy
+				eventFourPassed = true
+			end
+		end
+	end
+
+	if eventFourPassed and not eventFivePassed then
+		if musicTime >= 140300 then
+			animInterrupts = true
+			enemyZoom = 0.9
+			if cinema.sizeY < 4 then
+				cinema.sizeY = cinema.sizeY + 0.05
+			else
+				eventFivePassed = true
+			end 
+		end
 	end
 
 	--It works, but not well
-	if musicTime >= (164000) then
-		if musicTime <= (164000 + 1000) then
-
-			jump_sound:play()
-			jumpy.sizeX, jumpy.sizey = 1, 2
-			jumpy.x, jumpy.y = cam.x - 300, cam.y + 500
-
+	--effectiveness changes based on musicTime cus of my dumbass past self
+	if eventFivePassed and not eventSixPassed then
+		if musicTime >= (164000) then
+			if musicTime <= (164000 + 1000) then
+				jump_sound:play()
+				jumpy.sizeX, jumpy.sizeY = 1, 1
+				jumpy.x, jumpy.y = cam.x + screenwidth/4, cam.y + screenheight/0.9
 			else
-
-			jumpy.x, jumpy.y = offx, offy
-
+				jumpy.x, jumpy.y = offx, offy
+				eventSixPassed = true
+			end
 		end
 	end
 
@@ -221,6 +253,7 @@ return {
 		love.graphics.pop()
 
 		weeks:drawUI()
+		cinema:draw()
 		jumpscaryalert:draw()
 		jumpy:draw()
 		IntroCircle:draw()
@@ -239,6 +272,7 @@ return {
 		jumpy = nil
 		IntroCircle = nil
 		IntroText = nil
+		cinema = nil
 
 		weeks:leave()
 	end

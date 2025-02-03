@@ -2,6 +2,8 @@ local song, difficulty
 
 local stageBack
 
+local tooFestDeathVid
+
 return {
 	enter = function(self, from, songNum, songAppend)
 		weeks:enter()
@@ -9,6 +11,9 @@ return {
 		song = songNum
 		difficulty = songAppend
 		cam.sizeX, cam.sizeY = 0.85, 0.85
+		tooFestDeath = true
+
+		tooFestDeathVid = love.graphics.newVideo("videos/BfFuckingDies.ogv")
 
 		stageBack = graphics.newImage(love.graphics.newImage(graphics.imagePath("fest/sanicbg")))
 
@@ -17,6 +22,7 @@ return {
 		enemy.x, enemy.y = -380, 100
 		enemy.sizeX, enemy.sizeY = 0.35, 0.35
 		boyfriend.x, boyfriend.y = 500, 240
+		boyfriend.sizeX = 1
 
 		stageBack.sizeX, stageBack.sizeY = 1.5, 1.5
 
@@ -81,7 +87,6 @@ return {
 
 			love.graphics.push()
 				love.graphics.translate(cam.x * 0.9, cam.y * 0.9)
-
 				stageBack:draw()
 
 			love.graphics.pop()
@@ -102,6 +107,7 @@ return {
 	end,
 
 	leave = function(self)
+		tooFestDeath = false
 		stageBack = nil
 
 		weeks:leave()

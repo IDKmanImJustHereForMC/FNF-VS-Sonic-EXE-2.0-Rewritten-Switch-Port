@@ -52,7 +52,11 @@ return {
 			end
 		end
 
+
+
 		if not (countingDown or graphics.isFading()) and not (inst:isPlaying() and voices:isPlaying()) then
+			love.graphics.setBackgroundColor(0, 0, 0)
+
 			status.setLoading(true)
 
 			graphics.fadeOut(
@@ -100,5 +104,5 @@ return {
 	end
 }
 
---0 Kelvin, Absolute Zero. Fe, element symbol for Iron. Absolute Zero is cold, Iron is often misrepresented as Steel. ColdSteel.
+--0 Kelvin, Absolute Zero. Fe, element symbol for Iron. Absolute Zero is cold, REALLY cold, Iron is often represented as Steel. ColdSteel.
 --Included because my friend told me to do it

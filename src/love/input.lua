@@ -75,6 +75,7 @@ else
 			back = {"key:escape", "button:b"},
 			debugZoomOut = {"key:["},
 			debugZoomIn = {"key:]"},
+			debugMoveMod = {"key:z"},
 
 			gameLeft = gameLeft,
 			gameDown = gameDown,

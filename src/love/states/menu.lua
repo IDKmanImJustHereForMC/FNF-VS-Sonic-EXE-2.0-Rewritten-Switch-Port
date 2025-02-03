@@ -23,7 +23,7 @@ local menuState
 
 local menuNum = 1
 
-local funNum = love.math.random(0, 6)
+local funNum = love.math.random(0, 7)
 
 local weekNum = 1
 local songNum, songAppend
@@ -95,6 +95,7 @@ local weekMeta = {
 			"Sunshine"
 		}
 	},
+	--I fear this one
 	{
 		"Fleetway",
 		{
@@ -114,18 +115,24 @@ local confirmSound = love.audio.newSource("sounds/menu/confirm.ogg", "static")
 local music = love.audio.newSource("music/menu/menu.ogg", "stream")
 
 local function switchMenu(menu)
-	if menu == 4 then
-		funNum = love.math.random(0,6)
+--FUN STUFF!!!
+--this is where all the bonus stuff is, in the Useless Button!!!
+if menu == 4 then
+		--Temporarily set to 7 for testing
+		--Remember, love.math.random(0,7)
+		--Randomize the fun number each time for repeat button presses
+		funNum = 7
 
 		if funNum == 0 then
 			love.window.showMessageBox("Told ya", "What did I say?")
 		end
 		if funNum == 1 then
-			love.window.showMessageBox("Try reloading", "Are you dense?")
+			love.window.showMessageBox("Try that again", "Are you dense?")
 		end
 		if funNum == 2 then
 			love.window.showMessageBox("Uh-Huh", "I'm sure this is working out for you.")
 		end
+		--Sends the player to Personel
 		if funNum == 3 then
 			weekNum = 11
 			songNum = 1
@@ -148,6 +155,9 @@ local function switchMenu(menu)
 					end
 				)
 		end
+		--Sends player to Obituary/24
+		--Currently progression on it is paused
+		--Used to send the player to Objection Funk
 		if funNum == 4 then
 			weekNum = 12
 			songNum = 1
@@ -175,6 +185,30 @@ local function switchMenu(menu)
 		end
 		if funNum == 6 then
 			love.window.showMessageBox("Boo-Womp", "Maybe it will work out next time...")
+		end
+		--Sends player to Black Sun (EXEmerge)
+		if funNum == 7 then
+			weekNum = 13
+			songNum = 1
+			songDifficulty = 2
+
+			music:stop()
+			love.window.showMessageBox("BAREWITNESS", "You asked for it...")
+
+				status.setLoading(true)
+
+				graphics.fadeOut(
+					0.5,
+					function()
+						songAppend = difficultyStrs[songDifficulty]
+
+						storyMode = false
+
+						Gamestate.switch(weekData[weekNum], songNum, songAppend)
+
+						status.setLoading(false)
+					end
+				)
 		end
 
 		return switchMenu(1)
@@ -409,9 +443,11 @@ return {
 				girlfriendTitle:draw()
 
 				love.graphics.printf(
-					"v0.9 S-Public\n" ..
-					"Developed by me\n\n" ..
-					"Original game by Funkin' Crew, in association with Newgrounds",
+					"v1 INDEV-BUILD\n" ..
+					"INV ONLY PLAYTEST BUILD\n" ..
+					"Developed by IDK, a.k.a. RandomBananaUserIDK or AGU\n\n" ..
+					"Original game by Funkin' Crew, in association with Newgrounds\n"..
+					"Original mod by the Vs Sonic.EXE team",
 					-525,
 					90,
 					450,

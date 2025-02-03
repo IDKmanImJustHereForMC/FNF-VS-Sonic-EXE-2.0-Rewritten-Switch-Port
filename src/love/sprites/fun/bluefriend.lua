@@ -366,8 +366,8 @@ return graphics.newSprite(
 	},
 
 	{
-		["dead"] = {start = 270, stop = 289, speed = 24, offsetX = 14, offsetY = -12},
-		["dead confirm"] = {start = 270, stop = 289, speed = 24, offsetX = 14, offsetY = 20},
+		["dead"] = {start = 320, stop = 361, speed = 24, offsetX = 14, offsetY = -11},
+		["dead confirm"] = {start = 270, stop = 289, speed = 24, offsetX = 14, offsetY = -12},
 		["down"] = {start = 1, stop = 30, speed = 24, offsetX = -4, offsetY = -24},
 		["miss down"] = {start = 31, stop = 59, speed = 24, offsetX = 6, offsetY = -11},
 		["left"] = {start = 60, stop = 74, speed = 24, offsetX = 20, offsetY = -4},

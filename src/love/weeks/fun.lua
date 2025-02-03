@@ -16,6 +16,7 @@ return {
 		twofun = graphics.newImage(love.graphics.newImage(graphics.imagePath("fun/two")))
 		onefun = graphics.newImage(love.graphics.newImage(graphics.imagePath("fun/one")))
 		gofun = graphics.newImage(love.graphics.newImage(graphics.imagePath("fun/gofun")))
+		--go to ultrakill land
 		threefun.x, threefun.y = offx, offy
 		twofun.x, twofun.y = offx, offy
 		onefun.x, onefun.y = offx, offy
@@ -71,6 +72,7 @@ return {
 		weeks:initUI()
 
 		--I had to reconstruct this entire fucking chart
+		--idk why it just DIDNT work before i did so
 		weeks:generateNotes(love.filesystem.load("charts/fun/endless.lua")())
 	end,
 
@@ -83,31 +85,33 @@ return {
 
 		--that mid-song 321 go
 		--wild YanDev sighting *real* *not clickbait*
+		--why am i making it do the math when i can just do it myself wth
+		--like its not important that it does that
 		if musicTime >= 85900 then
-			if musicTime <= 85900 + 300 then
+			if musicTime <= 85900 + 400 then
 				threefun.x, threefun.y = cam.x - 700, cam.y - 500
 				threefun.sizeX, threefun.sizeY = 0.5, 0.5
 				--this is where I would put my Fade Out code... IF I HAD ONE
 			else
 				threefun.x, threefun.y = offx, offy
 			end
-			if musicTime >= 86200 then
-				if musicTime <= 86200 + 300 then
+			if musicTime >= 86300 then
+				if musicTime <= 86300 + 400 then
 					twofun.x, twofun.y = cam.x - 700, cam.y - 500
 				else
 					twofun.x, twofun.y = offx, offy
 				end
 			end
-			if  musicTime >= 86500 then
-				if musicTime <= 86500 + 300 then
+			if  musicTime >= 86700 then
+				if musicTime <= 86700 + 400 then
 					onefun.x, onefun.y = cam.x - 700, cam.y - 500
 					onefun.sizeX, onefun.sizeY = 1.5, 1.5
 				else
 					onefun.x, onefun.y = offx, offy
 				end
 			end
-			if musicTime >=  86800 then
-				if musicTime <= 86800 + 300 then
+			if musicTime >=  87100 then
+				if musicTime <= 87100 + 400 then
 					gofun.x, gofun.y = cam.x - 700, cam.y - 500
 					gofun.sizeX, gofun.sizeY = 2, 2
 				else
